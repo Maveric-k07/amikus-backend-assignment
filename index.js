@@ -4,9 +4,12 @@ const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 const todoRoute = require("./routes/todo");
 const authRoute = require("./routes/auth");
+const cors = require("cors");
 
+
+
+app.use(cors());
 dotenv.config();
-const PORT = 8080;
 
 // this would be in env
 const MONGO_URL =
@@ -25,6 +28,7 @@ app.use(express.json());
 app.use("/api/todo", todoRoute);
 app.use("/api/auth", authRoute);
 
-app.listen(PORT, () => {
-  console.log("Running on PORT : " + PORT);
+const port = process.env.PORT || 8080;
+app.listen(port, () => {
+  console.log(`Listening to ${port}`);
 });
